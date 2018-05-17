@@ -2,6 +2,9 @@
 <link rel="import" href="../materializecss-styles/materializecss-styles.html">
 <link rel="import" href="../hax-body-behaviors/hax-body-behaviors.html">
 <link rel="import" href="../schema-behaviors/schema-behaviors.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-slider/paper-slider.html">
+
 <!--
 `tuition-calc`
 A LRN element
@@ -20,8 +23,53 @@ A LRN element
       :host {
         display: block;
       }
+
+      .container {
+        display: flex;
+      }
+
+      .item {
+        padding: 1em;
+        display: flex;
+        justify-content: space-around;
+        flex-direction: column;
+      }
+
+      .label {
+        color: rgb(42, 136, 167);
+      }
+
+      .value {
+        display: block;
+        font-size: 1em;
+      }
     </style>
-    <h2>[[title]]</h2>
+
+    <paper-slider pin label="Credits" value="{{credits}}" min="3" max="200"></paper-slider>
+
+    <!-- Cost Per Credit: [[costPerCredit]]
+    <br>
+    Credits: [[credits]]
+    <br> -->
+    <div class="container">
+      <div class="item">
+        <span class="label">Cost Per Credit:</span>
+        <span class="value">$ [[costPerCredit]]</span>
+      </div>
+      <div class="item">
+        <span class="label">Total Cost:</span>
+        <span class="value">$ [[cost]]</span>
+      </div>
+      <div class="item">
+        <span class="label">Total Hours:</span>
+        <span class="value">[[totalHours]] hrs</span>
+      </div>
+    </div>
+
+    <template is="dom-if" if="[[__tonsOfCredits(credits)]]">
+      <div id="callUs">Please Just Call Us</div>
+    </template>
+
   </template>
 
   <script>
@@ -30,13 +78,50 @@ A LRN element
       is: 'tuition-calc',
       behaviors: [HAXBehaviors.PropertiesBehaviors, MaterializeCSSBehaviors.ColorBehaviors, SchemaBehaviors.Schema],
       properties: {
-        /**
-         * Title
-         */
-        title: {
-          type: String,
+        costPerCredit: {
+          type: Number,
+          value: 3000
         },
+        credits: {
+          type: Number,
+          value: 3
+        },
+        cost: {
+          type: Number,
+          computed: '__computeCost(costPerCredit, credits)'
+        },
+        totalHours: {
+          type: Number,
+          computed: '__computeTotalHours(credits, hoursPerCredit)'
+        },
+        hoursPerCredit: {
+          type: Number,
+          value: 100
+        },
+        pleaseCallUs: {
+          type: Boolean,
+          value: false
+        }
       },
+
+      __computeCost: function (costPerCredit, credits) {
+        console.log(costPerCredit, credits)
+        return  (costPerCredit * credits);
+      },
+
+     __computeTotalHours: function (credits, hoursPerCredit) {
+       return Number(credits * hoursPerCredit);
+     },
+
+     __tonsOfCredits: function (credits) {
+       if (this.pleaseCallUs) {
+        return (credits > 100) ? true : false;
+       }
+       else {
+         return false;
+       }
+     },
+
       /**
        * Attached to the DOM, now fire.
        */
