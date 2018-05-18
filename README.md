@@ -12,7 +12,7 @@
 <tuition-calc></tuition-calc>
 ```
 
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/LRNWebComponents/tuition-calc)
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/wvu-online/tuition-calc)
 
 # \<tuition-calc\>
 
