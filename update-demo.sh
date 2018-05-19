@@ -10,7 +10,7 @@ mkdir temp && cd temp
 # version of your page and its dependencies to a GitHub pages branch
 # of your repository (gh-pages). Below, we pass in a GitHub username
 # and the repo name for our element
-../tools/bin/gp.sh WVUOnline tuition-calc
+../tools/bin/gp.sh wvu-online tuition-calc
 
 # Finally, clean-up your temporary directory as you no longer require it
 cd ..

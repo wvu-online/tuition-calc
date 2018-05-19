@@ -19,7 +19,7 @@ A LRN element
 -->
 
 <dom-module id="tuition-calc">
-  <template>
+  <template cost-per-credit="{{costPerCredit}}" total-hours="{{totalHours}}">
     <style>
       body {
         font-family: 'Helvetica Neue', Helvetica, 'Helvetica LT Std', 'Helvetica CY', Arial, 'Lucida Grande', sans-serif;
@@ -217,8 +217,7 @@ A LRN element
       behaviors: [HAXBehaviors.PropertiesBehaviors, MaterializeCSSBehaviors.ColorBehaviors, SchemaBehaviors.Schema],
       properties: {
         costPerCredit: {
-          type: Number,
-          value: 659
+          type: Number
         },
         credits: {
           type: Number,
