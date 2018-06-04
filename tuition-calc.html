@@ -8,7 +8,7 @@
 
 <!--
 `tuition-calc`
-A LRN element
+A tuition calculator for WVU Online
 
 @demo demo/index.html
 
@@ -19,7 +19,7 @@ A LRN element
 -->
 
 <dom-module id="tuition-calc">
-  <template cost-per-credit="{{costPerCredit}}" total-hours="{{totalHours}}">
+  <template calc-title="{{calcTitle }}" cost-per-credit="{{costPerCredit}}" total-hours="{{totalHours}}">
     <style>
       body {
         font-family: 'Helvetica Neue', Helvetica, 'Helvetica LT Std', 'Helvetica CY', Arial, 'Lucida Grande', sans-serif;
@@ -114,6 +114,10 @@ A LRN element
         border-radius: 5px;
       }
 
+      paper-slider::shadow .slider-knob {
+        padding-left: 10px;
+      }
+
       iron-label {
         text-align: center;
       }
@@ -151,7 +155,7 @@ A LRN element
 
     </style>
 
-    <h2 class="title">Estimated Cost of Attendance</h2>
+    <h2 class="title">{{calcTitle}}</h2>
     <span class="note">Use slider to generate numerical cost.</span>
     <paper-slider pin label="Credits" value="{{credits}}" min="0" max="[[totalHours]]"></paper-slider>
 
@@ -216,6 +220,10 @@ A LRN element
       is: 'tuition-calc',
       behaviors: [HAXBehaviors.PropertiesBehaviors, MaterializeCSSBehaviors.ColorBehaviors, SchemaBehaviors.Schema],
       properties: {
+        calcTitle: {
+          type: String,
+	  value: "What Does it Cost?"
+	},
         costPerCredit: {
           type: Number
         },
